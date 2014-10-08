@@ -1,0 +1,39 @@
+{
+  "name": "req-fast",
+  "version": "0.0.1",
+  "description": "This module is designed to be the fast, lightweight way to fetch the web content(HTML stream).",
+  "main": "lib/req.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R spec -t 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Tjatse/req-fast.git"
+  },
+  "keywords": [
+    "request",
+    "http",
+    "client",
+    "fetch",
+    "grab",
+    "download"
+  ],
+  "author": "Tjatse",
+  "license": "Apache, Version 2.0",
+  "bugs": {
+    "url": "https://github.com/Tjatse/req-fast/issues"
+  },
+  "engines": [
+    "node >= 0.8.0"
+  ],
+  "dependencies": {
+    "tunnel":"^0.0.3",
+    "URIjs": "^1.14.0",
+    "iconv-lite": "^0.4.4"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "chai": "^1.9.1"
+  },
+  "readmeFilename": "README.md"
+}
