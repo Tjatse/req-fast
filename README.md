@@ -30,9 +30,10 @@ otherwise it should be an object, including:
 ## Stream pipe
 
 ## Thanks
-Thanks andris9. I've used [fetch](https://github.com/andris9/fetch) for a long time, it's very fast(my ES Spider needs speed up, `request` is
-very powerful, but too heavy/slow to me). Unfortunately andris9 could not maintain his repository any more, it have bugs, also I can fix them
-in my project, but it's fusssssssy. One more, I need a http request module that supports PROXY.
+Thanks andris9. I've used [fetch](https://github.com/andris9/fetch) for a long time, it's very fast(*my ES Spider needs speed up,
+[request](https://github.com/mikeal/request) is very powerful, but too heavy/slow to me, and can not automatic decode encodings,
+especially Chinese*). Unfortunately andris9 could not maintain his repository any more, it have bugs, also I can fix them
+in my project, but it's fussy. One more, I need a http request module that supports PROXY.
 
 ## License
 Copyright 2014 Tjatse
