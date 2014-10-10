@@ -1,10 +1,10 @@
 # req-fast
 
 This module is designed to be the fast, lightweight way to fetch the web content(HTML stream) from specific server. it supports:
-- Auto-redirect
-- Automatic decode content(avoid messy codes)
-- Cookie
-- Gzip(automatic decompress)
+- Follow redirects
+- Automatic decoding content encodings(avoid messy codes, especially Chinese)
+- Cookies
+- Gzip/Inflate encoding(automatic decompress)
 - Proxy
 
 ## Installation
@@ -13,7 +13,6 @@ npm install req-fast
 ```
 
 ## Usage
-### Basic
 ```javascript
 var req = require('req-fast');
 req([options])
@@ -82,13 +81,13 @@ var fs = require('fs');
 req('http://example.com/beauty.gif').pipe(fs.createWriteStream('download/001.gif'));
 ```
 ## TODO
-[ ] More examples
-[ ] Write test cases
-[ ] Performance tests
-[ ] Fix typo bugs
+- [ ] More examples
+- [ ] Write test cases
+- [ ] Performance tests
+- [ ] Fix typo bugs
 
 ## Thanks
-Thanks andris9. I've used [fetch](https://github.com/andris9/fetch) for a long time, it's very fast.
+Appreciate to andris9. I've used [fetch](https://github.com/andris9/fetch) for a long time, it's very fast and simple to use.
 > my ES Spider needs speed up, [request](https://github.com/mikeal/request) is very powerful,
 > but too heavy/slow to me, and can not automatic decode encodings, especially Chinese.
 
