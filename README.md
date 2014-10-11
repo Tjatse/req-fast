@@ -29,7 +29,8 @@ Otherwise it should be an object, including:
   - **uri || url** A url to which the request is sent.
   - **method** Http method, `GET` as default.
   - **timeout** Set a timeout (in milliseconds) for the request.
-  - **charset** Set charset of content encodings if necessary. **CAUTION:** this option takes top priority of decoding chunks, if not set, the `charset` in `response.headers['content-type']` will be used at first, then the `charset` on `<meta ... />`.
+  - **agent** A value indicating whether randomize generating browser-like `user-agent`, **CAUTION:** Once `user-agent` was generated, the `Process finished with exit code 0` thing will not happen unless triggered manually.
+  - **charset** Set charset of content encodings if necessary. **CAUTION:** This option takes top priority of decoding chunks, if not set, the `charset` in `response.headers['content-type']` will be used at first, then the `charset` on `<meta ... />`.
   - **disableRedirect** A value indicating whether disable following redirect or not, if this value was set to `true`, the `maxRedirects` will has no effect.
   - **maxRedirects** The maximum number of redirects to follow(3 as default).
   - **disableGzip** Request compressed content from server and automatic decompress response content, if this option sets to `true`, this feature will be disabled.
@@ -41,8 +42,7 @@ Otherwise it should be an object, including:
       'connection': 'keep-alive',
       'accept': 'text/html, text/javascript, application/json, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8',
       'pragma': 'no-cache',
-      'cache-control': 'no-cache',
-      'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36'
+      'cache-control': 'no-cache'
     }
     ```
     > You can override those in the `headers`.
@@ -56,7 +56,7 @@ Otherwise it should be an object, including:
 
 ### Callback
 Function to be called if the request succeeds or fails. The function gets passed two argument:
-  - **err** The `Error` instance. if succeeds, this value should be `null`.
+  - **error** The `Error` instance. if succeeds, this value should be `null`.
   - **response** the response object, including:
     - **body** The response body string.
     - **cookies** The response cookies(key/value pairs).
