@@ -53,6 +53,7 @@ Otherwise it should be an object, including:
     - **localAddress** Local interface if necessary.
     - **proxyAuth** Basic authorization for proxy server if necessary, i.e. `username:password`.
     - **headers** An object containing request headers.
+
 ### Callback
 Function to be called if the request succeeds or fails. The function gets passed two argument:
   - **err** The `Error` instance. if succeeds, this value should be `null`.
