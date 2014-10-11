@@ -29,6 +29,7 @@
   "dependencies": {
     "tunnel":"^0.0.3",
     "URIjs": "^1.14.0",
+    "random-ua": "^0.0.6",
     "iconv-lite": "^0.4.4"
   },
   "devDependencies": {
