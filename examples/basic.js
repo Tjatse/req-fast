@@ -1,10 +1,8 @@
 var req = require('../');
-req({
-  uri: 'http://www.google.com',
-  error: function(err){
-    console.log('[ERROR]', err.message);
-  },
-  success: function(resp){
-    console.log(resp);
+req('http://www.google.com', function(err, resp){
+  if(err){
+    return console.log('[ERROR]', err.message);
   }
+
+  console.log(resp);
 });
