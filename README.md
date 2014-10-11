@@ -1,10 +1,11 @@
 # req-fast
 
 This module is designed to be the fast, lightweight way to fetch the web content(HTML stream) from specific server. it supports:
-- Follow redirects
-- Automatic decoding content encodings(avoid messy codes, especially Chinese)
+- Follow Redirects
+- Automatic Decoding Content Encodings(Avoid Messy Codes, Especially Chinese)
 - Cookies
-- Gzip/Inflate encoding(automatic decompress)
+- JSON Response Auto Handling
+- Gzip/Deflate Encoding(Automatic Decompress)
 - Proxy
 
 ## Installation
