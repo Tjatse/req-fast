@@ -15,11 +15,14 @@ npm install req-fast
 ## Usage
 ```javascript
 var req = require('req-fast');
-req([options])
+req(options, callback);
 ```
+### Options
 When options is instance of **String**, it means the URL of server that to be requested.
 ```javascript
-req('http://www.google.com');
+req('http://www.google.com', function(err, resp){
+  // code goes here...
+});
 ```
 
 Otherwise it should be an object, including:
@@ -45,18 +48,20 @@ Otherwise it should be an object, including:
     > You can override those in the `headers`.
   - **data** Data to be sent to the server, it should be key/value pairs. If the method is not set to `POST`, it will be converted to a query string, and appended to the `url`.
   - **proxy** The proxy including all the options from [tunnel](https://www.npmjs.org/package/tunnel) proxy:
-    - **host** Proxy host.
-    - **port** Proxy port.
+    - **host** A domain name or IP address of the server to issue the proxy request to.
+    - **port** Port of remote proxy server..
     - **localAddress** Local interface if necessary.
-    - **proxyAuth** Basic authorization for proxy server if necessary, format as `username:password`.
-    - **headers** Header fields for proxy server if necessary.
-  - **success** Function to be called if the request succeeds. The function gets passed one argument: the response object, including:
+    - **proxyAuth** Basic authorization for proxy server if necessary, i.e. `username:password`.
+    - **headers** An object containing request headers.
+### Callback
+Function to be called if the request succeeds or fails. The function gets passed two argument:
+  - **err** The `Error` instance. if succeeds, this value should be `null`.
+  - **response** the response object, including:
     - **body** The response body string.
     - **cookies** The response cookies(key/value pairs).
     - **headers** The response headers(key/value pairs).
     - **redirects** The urls redirect(Array).
     - **statusCode** The response status code.
-  - **error** Function to be called if the request fails. The function gets passed one argument: the `Error` instance.
 
 > see test or examples folder for a complete example
 
