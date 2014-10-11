@@ -29,7 +29,7 @@ Otherwise it should be an object, including:
   - **uri || url** A url to which the request is sent.
   - **method** Http method, `GET` as default.
   - **timeout** Set a timeout (in milliseconds) for the request.
-  - **agent** A value indicating whether randomize generating browser-like `user-agent`, **CAUTION:** Once `user-agent` was generated, the `Process finished with exit code 0` thing will not happen unless triggered manually.
+  - **agent** A value indicating whether automatic generating browser-like `user-agent`, `true` as default. **CAUTION:** Once `user-agent` was generated, the `Process finished with exit code 0` thing will not happen unless triggered manually.
   - **charset** Set charset of content encodings if necessary. **CAUTION:** This option takes top priority of decoding chunks, if not set, the `charset` in `response.headers['content-type']` will be used at first, then the `charset` on `<meta ... />`.
   - **disableRedirect** A value indicating whether disable following redirect or not, if this value was set to `true`, the `maxRedirects` will has no effect.
   - **maxRedirects** The maximum number of redirects to follow(3 as default).
