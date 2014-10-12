@@ -3,14 +3,14 @@ var req = require('../'),
   expect = chai.expect,
   should = chai.should();
 
-describe.skip('decompress encodings', function(){
+describe('decompress encodings', function(){
   describe('gzip', function(){
     it('enabled(default)', function(done){
       req('http://httpbin.org/gzip', function(err, resp){
         should.not.exist(err);
         should.exist(resp.body);
         expect(resp.body).to.have.property('gzipped', true);
-        expect(resp.body).deep.have.property('headers.Accept-Encoding', 'gzip,deflate');
+        expect(resp.body).deep.have.property('headers.Accept-Encoding', 'gzip,deflate,sdch');
         done();
       });
     });
@@ -33,7 +33,7 @@ describe.skip('decompress encodings', function(){
         should.not.exist(err);
         should.exist(resp.body);
         expect(resp.body).to.have.property('deflated', true);
-        expect(resp.body).deep.have.property('headers.Accept-Encoding', 'gzip,deflate');
+        expect(resp.body).deep.have.property('headers.Accept-Encoding', 'gzip,deflate,sdch');
         done();
       });
     });

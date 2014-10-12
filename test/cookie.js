@@ -3,7 +3,7 @@ var req = require('../'),
   expect = chai.expect,
   should = chai.should();
 
-describe.skip('cookies', function(){
+describe('cookies', function(){
   describe('were passed to server', function(){
     it('should be detected', function(done){
       req({

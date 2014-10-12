@@ -4,7 +4,7 @@ var req = require('../'),
   should = chai.should();
 
 describe('decoding content', function(){
-  describe.skip('from Chinese', function(){
+  describe('from Chinese', function(){
     it('automatic', function(done){
       req('http://news.163.com/14/1011/05/A88K45VJ0001121M.html', function(err, resp){
         should.not.exist(err);

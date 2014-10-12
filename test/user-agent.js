@@ -4,7 +4,7 @@ var req = require('../'),
   should = chai.should();
 
 describe('generate agent', function(){
-  describe.skip('randomize', function(){
+  describe('randomize', function(){
     it('enabled(default)', function(done){
       req('http://httpbin.org/user-agent', function(err, resp){
         should.not.exist(err);

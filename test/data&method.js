@@ -4,7 +4,7 @@ var req = require('../'),
   should = chai.should();
 
 // all support methods: 'OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'TRACE', 'CONNECT'
-describe.skip('request', function(){
+describe('request', function(){
   describe('through GET method', function(){
     it('no matter dataType is', function(done){
       req({

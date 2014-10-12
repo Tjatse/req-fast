@@ -7,7 +7,7 @@ var req = require('../'),
 describe('piping stream',function(){
 
   describe('from google',function(){
-    it.skip('should create file and have HTML content',function(done){
+    it('should create file and have HTML content',function(done){
       var pipeGoogleHome = function(){
         req('http://www.google.com').pipe(fs.createWriteStream('google.html'));
         // check file 5 seconds later.
@@ -19,6 +19,7 @@ describe('piping stream',function(){
                 should.not.exist(err);
                 should.exist(body);
                 expect(body).to.match(/^\s*</);
+                try{fs.unlink('google.html')}catch(err){}
                 done();
               });
             }

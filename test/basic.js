@@ -4,7 +4,7 @@ var req = require('../'),
   should = chai.should();
 
 describe('basic request', function(){
-  describe.skip('from google', function(){
+  describe('from google', function(){
     it('everything goes fine', function(done){
       req('http://www.google.com', function(err, resp){
         should.not.exist(err);
