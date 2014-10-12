@@ -1,4 +1,5 @@
 # req-fast
+[![Build Status](https://travis-ci.org/Tjatse/req-fast.svg)](https://travis-ci.org/Tjatse/req-fast)[![NPM version](https://badge.fury.io/js/req-fast.svg)](http://badge.fury.io/js/req-fast)
 
 This module is designed to be the fast, lightweight way to fetch the web content(HTML stream) from specific server. it supports:
 - Follow Redirects
