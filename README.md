@@ -87,6 +87,19 @@ In my project, I will download millions of files from servers, using `pipe` coul
 var fs = require('fs');
 req('http://example.com/beauty.gif').pipe(fs.createWriteStream('download/001.gif'));
 ```
+
+## HTTP Status
+All the http statuses will be handled, but you'd better check status carefully, some status likes 404, and error will be thrown:
+```javascript
+req('http://example.com', function(err, resp){
+  if(err){
+    // get status error;
+  }
+  // statusCode always exist except STREAM `error` was caught.
+  var status = resp && resp.statusCode
+})
+```
+
 ## TODO
 - [ ] More examples
 - [ ] Write test cases
