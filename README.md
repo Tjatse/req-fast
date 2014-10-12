@@ -31,7 +31,7 @@ Otherwise it should be an object, including:
   - **method** Http method, `GET` as default, but if `data` was set and this value was undefined, it will be `POST`. And it could be one of *OPTIONS*, *GET*, *HEAD*, *POST*, *PUT*, *PATCH*, *DELETE*, *TRACE* and *CONNECT*.
   - **timeout** Set a timeout (in milliseconds) for the request.
   - **dataType** Type of data that you are expecting send to server, it could be below values:
-    - **json** `content-type` equals `application/json` and the data(response.body) back from server will be parsed as JSON automatic.
+    - **json** `content-type` equals `application/json`.
     - **form** `content-type` equals `application/x-www-form-urlencoded`.
   - **data** Data to be sent to the server, it should be key/value pairs. If the method is not set to `POST`, it will be converted to a query string, and appended to the `url`.
   - **agent** A value indicating whether automatic generating browser-like `user-agent`, `true` as default.
@@ -54,17 +54,17 @@ Otherwise it should be an object, including:
     ```
     > You can override those in the `headers`.
     - **proxy** The proxy including all the options from [tunnel](https://www.npmjs.org/package/tunnel) proxy:
-    - **host** A domain name or IP address of the server to issue the proxy request to.
-    - **port** Port of remote proxy server..
-    - **localAddress** Local interface if necessary.
-    - **proxyAuth** Basic authorization for proxy server if necessary, i.e. `username:password`.
-    - **headers** An object containing request headers.
+      - **host** A domain name or IP address of the server to issue the proxy request to.
+      - **port** Port of remote proxy server..
+      - **localAddress** Local interface if necessary.
+      - **proxyAuth** Basic authorization for proxy server if necessary, i.e. `username:password`.
+      - **headers** An object containing request headers.
 
 ### Callback
 Function to be called if the request succeeds or fails. The function gets passed two argument:
   - **error** The `Error` instance. if succeeds, this value should be `null`. If status is not okay, `error.message` should be one of [http.STATUSCODES](http://nodejs.org/api/http.html#http_http_status_codes).
   - **response** the response object, including:
-    - **body** The response body string.
+    - **body** The response body. If `response.headers['content-type']` equals `application/json`, the data(response.body) back from server will be parsed as JSON automatic, otherwise is `String`.
     - **cookies** The response cookies(key/value pairs).
     - **headers** The response headers(key/value pairs).
     - **redirects** The urls redirect(Array).
