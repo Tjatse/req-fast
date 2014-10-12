@@ -57,7 +57,7 @@ Otherwise it should be an object, including:
 
 ### Callback
 Function to be called if the request succeeds or fails. The function gets passed two argument:
-  - **error** The `Error` instance. if succeeds, this value should be `null`.
+  - **error** The `Error` instance. if succeeds, this value should be `null`. If status is not okay, `error.message` should be one of [http.STATUSCODES](http://nodejs.org/api/http.html#http_http_status_codes).
   - **response** the response object, including:
     - **body** The response body string.
     - **cookies** The response cookies(key/value pairs).
