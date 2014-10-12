@@ -94,7 +94,7 @@ req('http://example.com/beauty.gif').pipe(fs.createWriteStream('download/001.gif
 ```
 
 ## HTTP Status
-All the http statuses will be handled, but you'd better check status carefully, some status likes 404, and error will be thrown:
+All the http statuses will be handled, but you'd better check status carefully.
 ```javascript
 req('http://example.com', function(err, resp){
   if(err){
@@ -103,6 +103,20 @@ req('http://example.com', function(err, resp){
   // statusCode always exist except STREAM `error` was caught.
   var status = resp && resp.statusCode;
 })
+```
+
+## Proxy
+```javascript
+req({
+  url: 'http://example.com',
+  proxy: {
+    host: '127.0.0.1',  // host
+    port: 8082,         // port
+    proxyAuth: 'user:password'  // authentication if necessary.
+  }
+}, function(err, resp){
+  // code goes here
+});
 ```
 
 ## Performance
