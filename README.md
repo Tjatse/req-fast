@@ -9,7 +9,7 @@ This module is designed to be the fast, lightweight way to fetch the web content
 - Proxy
 
 ## Installation
-```javascript
+```
 npm install req-fast
 ```
 
@@ -107,9 +107,16 @@ req('http://example.com', function(err, resp){
 
 ## Performance
 
+## Tests
+Most tests' requests are sent to [httpbin](http://httpbin.org), so if you wanna run the test, please make sure you can resolve the host(httpbin).
+Run test:
+```
+npm test
+```
+
 ## TODO
 - [ ] More examples
-- [ ] Write test cases
+- [x] Write test cases
 - [ ] Performance tests
 - [ ] Fix typo bugs
 
