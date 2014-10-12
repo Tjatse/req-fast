@@ -53,12 +53,12 @@ Otherwise it should be an object, including:
     }
     ```
     > You can override those in the `headers`.
-    - **proxy** The proxy including all the options from [tunnel](https://www.npmjs.org/package/tunnel) proxy:
-      - **host** A domain name or IP address of the server to issue the proxy request to.
-      - **port** Port of remote proxy server..
-      - **localAddress** Local interface if necessary.
-      - **proxyAuth** Basic authorization for proxy server if necessary, i.e. `username:password`.
-      - **headers** An object containing request headers.
+  - **proxy** The proxy including all the options from [tunnel](https://www.npmjs.org/package/tunnel) proxy:
+    - **host** A domain name or IP address of the server to issue the proxy request to.
+    - **port** Port of remote proxy server..
+    - **localAddress** Local interface if necessary.
+    - **proxyAuth** Basic authorization for proxy server if necessary, i.e. `username:password`.
+    - **headers** An object containing request headers.
 
 ### Callback
 Function to be called if the request succeeds or fails. The function gets passed two argument:
