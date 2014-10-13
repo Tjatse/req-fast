@@ -35,9 +35,11 @@ Otherwise it should be an object, including:
     - **json** `content-type` equals `application/json`.
     - **form** `content-type` equals `application/x-www-form-urlencoded`.
   - **data** Data to be sent to the server, it should be key/value pairs. If the method is not set to `POST`, it will be converted to a query string, and appended to the `url`.
-  - **agent** A value indicating whether automatic generating browser-like `user-agent`, `true` as default.
+  - **agent** A value indicating whether automatic generating browser-like `user-agent`, i.e.:`Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36`, `true` as default.
+
     > Once `user-agent` was generated, the `Process finished with exit code 0` thing will not happen unless triggered manually, i.e.: COMMAND+C or `process.exit(0)`.
   - **charset** Set charset of content encodings if necessary.
+
     > This option takes top priority of decoding chunks, if not set, the `charset` in `response.headers['content-type']` will be used at first, then the `charset` on `<meta ... />`.
   - **disableRedirect** A value indicating whether disable following redirect or not, if this value was set to `true`, the `maxRedirects` will has no effect.
   - **maxRedirects** The maximum number of redirects to follow(3 as default).
@@ -85,7 +87,7 @@ rs.on('end', function(resp){
 });
 rs.on('error', function(error){
   // ...
-})
+});
 ```
 ### Pipe to file
 In my project, I will download millions of files from servers, using `pipe` could improving performance, the file downloading from server chunk by chunk, but not read whole file to memory then download once, it sucks.
