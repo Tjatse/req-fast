@@ -5,7 +5,7 @@ var req = require('../'),
 
 describe('request server', function(){
   describe('get IP address', function(){
-    it.skip('with VPN', function(done){
+    it.skip('hide myself', function(done){
       req('http://httpbin.org/ip', function(err, resp){
         should.not.exist(err);
         should.exist(resp.body);
