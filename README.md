@@ -1,5 +1,5 @@
 # req-fast
-[![Build Status](https://travis-ci.org/Tjatse/req-fast.svg)](https://travis-ci.org/Tjatse/req-fast)[![NPM version](https://badge.fury.io/js/req-fast.svg)](http://badge.fury.io/js/req-fast)
+[![Build Status](https://travis-ci.org/Tjatse/req-fast.svg)](https://travis-ci.org/Tjatse/req-fast) [![NPM version](https://badge.fury.io/js/req-fast.svg)](http://badge.fury.io/js/req-fast)
 
 This module is designed to be the fast, lightweight way to fetch the web content(HTML stream) from specific server. it supports:
 - Follow Redirects
@@ -31,7 +31,7 @@ Otherwise it should be an object, including:
   - **uri || url** A url to which the request is sent.
   - **method** Http method, `GET` as default, but if `data` was set and this value was undefined, it will be `POST`. And it could be one of *OPTIONS*, *GET*, *HEAD*, *POST*, *PUT*, *PATCH*, *DELETE*, *TRACE* and *CONNECT*.
   - **timeout** Set a timeout (in milliseconds) for the request.
-  - **dataType** Type of data that you are expecting send to server, it could be below values:
+  - **dataType** Type of data that you are expecting send to server, this property effects on POST, PUT, PATCH `method` only. It could be below values:
     - **json** `content-type` equals `application/json`.
     - **form** `content-type` equals `application/x-www-form-urlencoded`.
   - **data** Data to be sent to the server, it should be key/value pairs. If the method is not set to `POST`, it will be converted to a query string, and appended to the `url`.
@@ -94,7 +94,7 @@ var fs = require('fs');
 req('http://example.com/beauty.gif').pipe(fs.createWriteStream('download/001.gif'));
 ```
 
-## HTTP Status
+## Http Status
 All the http statuses will be handled, but you'd better check status carefully.
 ```javascript
 req('http://example.com', function(err, resp){
@@ -130,10 +130,10 @@ npm test
 ```
 
 ## TODO
-- [ ] More examples
+- [x] More examples
 - [x] Write test cases
 - [ ] Performance tests
-- [ ] Fix typo bugs
+- [x] Fix typo bugs
 
 ## Thanks
 Appreciate to andris9. I've used [fetch](https://github.com/andris9/fetch) for a long time, it's very fast and simple to use.
