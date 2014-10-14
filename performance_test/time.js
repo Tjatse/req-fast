@@ -3,10 +3,8 @@ var req = require('request'),
   async = require('async'),
   progress = require('progress');
 
-
 // ignoring network issues, using local site for testing.
-// TODO: how about test `req-fast` module, just change the 'request' to 'req-fast'.
-test('http://localhost:9002/', 'req-fast', 1000);
+test('http://localhost:9002/', process.argv.length > 2 ? process.argv[2] : 'req-fast', 1000);
 
 /****** test codes ********/
 var total, bar;

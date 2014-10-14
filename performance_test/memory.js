@@ -4,10 +4,8 @@ var req = require('request'),
   memwatch = require('memwatch'),
   progress = require('progress');
 
-
 // ignoring network issues, using local site for testing.
-// TODO: how about test `req-fast` module, just change the 'request' to 'req-fast'.
-test('http://localhost:9002/', 'req-fast', 10);
+test('http://localhost:9002/', process.argv.length > 2 ? process.argv[2] : 'req-fast', process.argv.length > 3 ? parseInt(process.argv[3]):10);
 
 /****** test codes ********/
 var total, bar;
