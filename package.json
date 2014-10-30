@@ -4,7 +4,7 @@
   "description": "This module is designed to be the fast, lightweight way to fetch the web content(HTML stream).",
   "main": "lib/req.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec -t 20000"
+    "test": "./node_modules/.bin/mocha -R spec -t 30000"
   },
   "repository": {
     "type": "git",
