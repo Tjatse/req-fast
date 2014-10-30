@@ -29,7 +29,7 @@ describe('request server', function(){
     });
     it('make Url reachable', function(done){
       req({
-        url: 'http://httpbin.org/redirect/4',
+        url: 'http://httpbin.org/redirect/2',
         maxRedirects: 10
       }, function(err, resp){
         should.not.exist(err);

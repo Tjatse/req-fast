@@ -8,28 +8,29 @@ describe('piping stream',function(){
 
   describe('from bing',function(){
     it('should create file and have HTML content',function(done){
+      var savedPath = __dirname + '/bing.html';
       var pipePingHome = function(){
-        req('http://www.bing.com').pipe(fs.createWriteStream('bing.html'));
-        // check file 5 seconds later.
-        setTimeout(function(){
-          fs.exists('bing.html', function(exists){
+        var rs = req('http://www.bing.com');
+        rs.pipe(fs.createWriteStream(savedPath));
+        rs.on('end', function(){
+          fs.exists(savedPath, function(exists){
             exists.should.be.ok;
             if(exists){
-              return fs.readFile('bing.html', function(err, body){
+              return fs.readFile(savedPath, {'encoding': 'utf-8'}, function(err, body){
                 should.not.exist(err);
                 should.exist(body);
                 expect(body).to.match(/^\s*</);
-                try{fs.unlink('bing.html')}catch(err){}
+                try{fs.unlink(savedPath)}catch(err){}
                 done();
               });
             }
             done();
           });
-        }, 5000);
+        });
       };
-      fs.exists('bing.html', function(exists){
+      fs.exists(savedPath, function(exists){
         if(exists){
-          return fs.unlink('bing.html', pipeGoogleHome);
+          return fs.unlink(savedPath, pipePingHome);
         }
         pipePingHome();
       });
