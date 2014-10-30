@@ -4,9 +4,9 @@ var req = require('../'),
   should = chai.should();
 
 describe('basic request', function(){
-  describe('from google', function(){
+  describe('from bing', function(){
     it('everything goes fine', function(done){
-      req('http://www.google.com', function(err, resp){
+      req('http://www.bing.com', function(err, resp){
         should.not.exist(err);
         expect(resp).to.be.an('object');
         expect(resp.cookies).to.be.an('object');

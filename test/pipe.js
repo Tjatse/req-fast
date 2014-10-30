@@ -6,20 +6,20 @@ var req = require('../'),
 
 describe('piping stream',function(){
 
-  describe('from google',function(){
+  describe('from bing',function(){
     it('should create file and have HTML content',function(done){
-      var pipeGoogleHome = function(){
-        req('http://www.google.com').pipe(fs.createWriteStream('google.html'));
+      var pipePingHome = function(){
+        req('http://www.bing.com').pipe(fs.createWriteStream('bing.html'));
         // check file 5 seconds later.
         setTimeout(function(){
-          fs.exists('google.html', function(exists){
+          fs.exists('bing.html', function(exists){
             exists.should.be.ok;
             if(exists){
-              return fs.readFile('google.html', function(err, body){
+              return fs.readFile('bing.html', function(err, body){
                 should.not.exist(err);
                 should.exist(body);
                 expect(body).to.match(/^\s*</);
-                try{fs.unlink('google.html')}catch(err){}
+                try{fs.unlink('bing.html')}catch(err){}
                 done();
               });
             }
@@ -27,11 +27,11 @@ describe('piping stream',function(){
           });
         }, 5000);
       };
-      fs.exists('google.html', function(exists){
+      fs.exists('bing.html', function(exists){
         if(exists){
-          return fs.unlink('google.html', pipeGoogleHome);
+          return fs.unlink('bing.html', pipeGoogleHome);
         }
-        pipeGoogleHome();
+        pipePingHome();
       });
     });
   });
