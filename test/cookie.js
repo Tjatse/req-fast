@@ -39,5 +39,23 @@ describe('cookies', function(){
         done();
       });
     });
+  });
+
+  describe('were sent from server', function(){
+    it('should be detected even redirecting', function(done){
+      req({
+        url: 'http://httpbin.org/cookies/set',
+        method: 'get',
+        trackCookie: true,
+        data: {
+          'username':'tjatse'
+        }
+      }, function(err, resp){
+        should.not.exist(err);
+        should.exist(resp.cookies);
+        expect(resp.cookies).to.have.property('username', 'tjatse');
+        done();
+      });
+    });
   })
 });
