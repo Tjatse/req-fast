@@ -44,6 +44,7 @@ Otherwise it should be an object, including:
   - **disableRedirect** A value indicating whether disable following redirect or not, if this value was set to `true`, the `maxRedirects` will has no effect.
   - **maxRedirects** The maximum number of redirects to follow(3 as default).
   - **disableGzip** Request compressed content from server and automatic decompress response content, if this option sets to `true`, this feature will be disabled.
+  - **trackCookie** A value indicating whether gathering all the cookies when following redirect or not, `false` by default, `false` means gathering the cookie of last request only.
   - **cookies** It should be key/value pairs.
   - **headers** Http headers, it should be key/value pairs, and some default values were:
 
