@@ -123,62 +123,38 @@ req({
 });
 ```
 
-## Performance
+## Benchmark
 It's comparing with `request` module, in order to avoid the influence of network, all the requests are sent to localhost.
-The performance test is just for reference, it's not trustworthy ^^.
-- **Install performance test modules**
+The test cases are just for referencing, it's not trustworthy ^^.
 
-  ```
-  npm install request async progress memwatch
-  ```
-- **Start server**
+### Run Server
+```
+node benchmark/server.js
+```
 
-  ```
-  node performance_test/server.js
-  ```
-- **Time**
-  1000 requests are sent to server one by one.
-  **request**
-  ```
-  node performance_test/time.js request
-  ```
-  **req-fast**
-  ```
-  node performance_test/time.js req-fast
-  ```
-  **Results(A 0.1ms to 0.2ms deviation)**
+### Elapsed Time
+```
+node benchmark/elapsed_time.js
+```
 
-  |Server Status  |Module |Milliseconds/q |
-  |:--------------|:------|:------------|
-  |opening        |request|1.958        |
-  |opening        |req-fast|1.752       |
-  |closed         |request|1.416        |
-  |closed         |req-fast|1.121       |
+```
+A sample of 1000 cases:
+request x 1.177 ms (+834.58%, -100.00%).
+req-fast x 1.062 ms (+1218.27%, -100.00%).
+```
 
-- **Memory**
-  **request**
-  10 requests for example.
-  ```
-  node performance_test/memory.js request 10
-  ```
-  **req-fast**
-  ```
-  node performance_test/memory.js req-fast 10
-  ```
-  **Results(A 500 to 1000 bytes deviation)**
+### Memory Usage
+```
+node benchmark/memory_usage.js
+```
 
-  |Server Status  |Module |Requests |bytes changed/q |
-  |:--------------|:------|:--------|:---------|
-  |opening        |request|10 |131161.6        |
-  |opening        |req-fast|10  |139297.6        |
-  |closed         |request|10 |18467.2        |
-  |closed         |req-fast|10 |26529.6       |
-  |opening        |request|20 |68255.2       |
-  |opening        |req-fast|20  |78016.8        |
-  |closed         |request|20 |8500        |
-  |closed         |req-fast|20 |16234.4       |
+```
+A sample of 1000 cases:
+request x 20729.856 bytes (+11458.98%, -100.00%).
+req-fast x 18063.36 bytes (+19038.32%, -100.00%).
+```
 
-  GC effects these a lot, `req-fast` always take more memory(about 1KB), maybe it's used to automatic decompress encodings and decode Buffers by detected charset.
+> GC effects these a lot, and I do not believe the result of `process.memoryUsage().rss`, `request` should performances better.
 
 ## Tests
 Most tests' requests are sent to [httpbin](http://httpbin.org), so if you wanna run the test, please make sure you can resolve the host(httpbin).
