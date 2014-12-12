@@ -1,6 +1,6 @@
 {
   "name": "req-fast",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "This module is designed to be the fast, lightweight way to fetch the web content(HTML stream).",
   "main": "lib/req.js",
   "scripts": {
@@ -34,7 +34,9 @@
   },
   "devDependencies": {
     "mocha": "^1.21.4",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "request": "~2.51.0",
+    "async": "~0.9.0"
   },
   "readmeFilename": "README.md"
 }
