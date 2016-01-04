@@ -139,8 +139,10 @@ node benchmark/elapsed_time.js
 
 ```
 A sample of 1000 cases:
-request x 1.177 ms (+834.58%, -100.00%).
-req-fast x 1.062 ms (+1218.27%, -100.00%).
+request x 2.345 ms (+1307.25%, -57.36%).
+req-fast x 2.009 ms (+895.52%, -100.00%).
+request x 2.449 ms (+879.99%, -59.17%).
+req-fast x 1.99 ms (+754.27%, -100.00%).
 ```
 
 ### Memory Usage
@@ -150,8 +152,10 @@ node benchmark/memory_usage.js
 
 ```
 A sample of 1000 cases:
-request x 20729.856 bytes (+11458.98%, -100.00%).
-req-fast x 18063.36 bytes (+19038.32%, -100.00%).
+request x 31576.064 bytes (+7553.39%, -2655.45%).
+req-fast x 11227.136 bytes (+43752.61%, -37020.83%).
+request x 30715.904 bytes (+7741.05%, -2820.36%).
+req-fast x 11337.728 bytes (+43975.14%, -45945.38%).
 ```
 
 > GC effects these a lot, and I do not believe the result of `process.memoryUsage().rss`, `request` should performances better.
