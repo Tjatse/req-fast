@@ -11,7 +11,7 @@ This module is designed to be the fast, lightweight way to fetch the web content
 
 ## Installation
 ```
-npm install req-fast
+npm install req-fast --production
 ```
 
 ## Usage
