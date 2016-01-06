@@ -14,18 +14,17 @@ describe('decoding content', function(){
         done();
       });
     });
-    it.skip('avoid messy codes', function(done){
+    it('avoid messy codes when multi charset detected', function(done){
       req({
-        url: 'http://game.163.com/14/0506/10/9RI8M9AO00314SDA.html',
-        charset: 'gbk'
+        url: 'http://www.ce.cn/xwzx/gnsz/gdxw/201505/25/t20150525_5453608.shtml'
       }, function(err, resp){
         should.not.exist(err);
         expect(resp).to.be.an('object');
         resp.statusCode.should.equal(200);
         expect(resp.body).to.match(/^\s*</);
-        expect(resp.body).to.have.string('亲爱的冒险者');
+        expect(resp.body).to.have.string('饮用水新国标实施');
         done();
       });
-    })
+    });
   })
 });
