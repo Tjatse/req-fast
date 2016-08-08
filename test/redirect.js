@@ -47,7 +47,7 @@ describe('request server', function(){
         done();
       });
     });
-    it('automatic change request client from http to https', function(done){
+    it.skip('automatic change request client from http to https', function(done){
       req({
         url: 'http://dentistvschef.wordpress.com/2013/01/16/japanese-spring-onionscallionleek-pancake-ala-dentist-chef/'
       }, function(err, resp){
