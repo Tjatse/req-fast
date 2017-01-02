@@ -10,8 +10,13 @@ This module is designed to be the fast, lightweight way to fetch the web content
 - Proxy
 
 ## Installation
+```bash
+$ npm install req-fast --production
 ```
-npm install req-fast --production
+
+## Debug
+```bash
+$ DEBUG=reqfast.* node ...
 ```
 
 ## Usage
@@ -28,14 +33,14 @@ req('http://www.google.com', function(err, resp){
 ```
 
 Otherwise it should be an object, including:
-  - **uri || url** A url to which the request is sent.
-  - **method** Http method, `GET` as default, but if `data` was set and this value was undefined, it will be `POST`. And it could be one of *OPTIONS*, *GET*, *HEAD*, *POST*, *PUT*, *PATCH*, *DELETE*, *TRACE* and *CONNECT*.
-  - **timeout** Set a timeout (in milliseconds) for the request.
+  - **uri || url** Url to which the request is sent.
+  - **method** Http method, `GET` as default, but if `data` was set and this value was `undefined`, it will be `POST`. And it could be one of *OPTIONS*, *GET*, *HEAD*, *POST*, *PUT*, *PATCH*, *DELETE*, *TRACE* and *CONNECT*.
+  - **timeout** Set a timeout (in milliseconds) for the request, `60000`(60 seconds) by default.
   - **dataType** Type of data that you are expecting send to server, this property effects on POST, PUT, PATCH `method` only. It could be below values:
     - **json** `content-type` equals `application/json`.
     - **form** `content-type` equals `application/x-www-form-urlencoded`.
   - **data** Data to be sent to the server, it should be key/value pairs. If the method is not set to `POST`, it will be converted to a query string, and appended to the `url`.
-  - **agent** A value indicating whether automatic generating browser-like `user-agent`, i.e.:`Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36`, `true` as default.
+  - **agent** A value indicating whether automatic generating browser-like `user-agent` or not, i.e.:`Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36`, `true` as default.
 
     > Once `user-agent` was generated, the `Process finished with exit code 0` thing will not happen unless triggered manually, i.e.: COMMAND+C or `process.exit(0)`.
   - **charset** Set charset of content encodings if necessary.
@@ -46,7 +51,7 @@ Otherwise it should be an object, including:
   - **disableGzip** Request compressed content from server and automatic decompress response content, if this option sets to `true`, this feature will be disabled.
   - **trackCookie** A value indicating whether gathering all the cookies when following redirect or not, `false` by default, `false` means gathering the cookie of last request only.
   - **cookies** It should be key/value pairs.
-  - **headers** Http headers, it should be key/value pairs, and some default values were:
+  - **headers** Http headers, it should be key/value pairs, and by default:
 
     ```javascript
     {
@@ -56,7 +61,7 @@ Otherwise it should be an object, including:
       'cache-control': 'no-cache'
     }
     ```
-    > You can override those in the `headers`.
+    > You can override the aboving in `headers`.
   - **proxy** The proxy including all the options from [tunnel](https://www.npmjs.org/package/tunnel) proxy:
     - **host** A domain name or IP address of the server to issue the proxy request to.
     - **port** Port of remote proxy server..
@@ -68,7 +73,7 @@ Otherwise it should be an object, including:
 Function to be called if the request succeeds or fails. The function gets passed two argument:
   - **error** The `Error` instance. if succeeds, this value should be `null`. If status is not okay, `error.message` should be one of [http.STATUSCODES](http://nodejs.org/api/http.html#http_http_status_codes).
   - **response** the response object, including:
-    - **body** The response body. If `response.headers['content-type']` equals `application/json`, the data(response.body) back from server will be parsed as JSON automatic, otherwise is `String`.
+    - **body** The response body. If `response.headers['content-type']` equals `application/json`, the data(response.body) back from server will be parsed as `JSON` automatic, otherwise is `String`.
     - **cookies** The response cookies(key/value pairs).
     - **headers** The response headers(key/value pairs).
     - **redirects** The urls redirect(Array).
@@ -91,7 +96,7 @@ rs.on('error', function(error){
 });
 ```
 ### Pipe to file
-In my project, I will download millions of files from servers, using `pipe` could improving performance, the file downloading from server chunk by chunk, but not read whole file to memory then download once, it sucks.
+In my project downloading millions of files from servers, using `pipe` could improving performance, the file downloading from server chunk by chunk, but not read whole file to memory then download once, it sucks.
 ```javascript
 var fs = require('fs');
 req('http://example.com/beauty.gif').pipe(fs.createWriteStream('download/001.gif'));
@@ -129,36 +134,40 @@ The test cases are just for referencing, it's not trustworthy ^^.
 
 ### Run Server
 ```
-node benchmark/server.js
+node --harmony benchmark/server.js
 ```
 
 ### Elapsed Time
 ```
-node benchmark/elapsed_time.js
+node --harmony benchmark/elapsed_time.js
 ```
 
 ```
 A sample of 1000 cases:
-request x 2.345 ms (+1307.25%, -57.36%).
-req-fast x 2.009 ms (+895.52%, -100.00%).
-request x 2.449 ms (+879.99%, -59.17%).
-req-fast x 1.99 ms (+754.27%, -100.00%).
+
+module  avg min max
+request 0.005ms 0ms 2ms
+reqfast 0.001ms 0ms 1ms
+
+completed
 ```
 
 ### Memory Usage
 ```
-node benchmark/memory_usage.js
+node --harmony benchmark/memory_usage.js
 ```
 
 ```
 A sample of 1000 cases:
-request x 31576.064 bytes (+7553.39%, -2655.45%).
-req-fast x 11227.136 bytes (+43752.61%, -37020.83%).
-request x 30715.904 bytes (+7741.05%, -2820.36%).
-req-fast x 11337.728 bytes (+43975.14%, -45945.38%).
+
+module  avg     min max
+request 204.8b  0b  110592b
+reqfast 8.192b  0b  4096b
+
+completed
 ```
 
-> GC effects these a lot, and I do not believe the result of `process.memoryUsage().rss`, `request` should performances better.
+> GC effects these a lot, and I do not believe the result of `process.memoryUsage().rss`, `request` should performances better maybe.
 
 ## Tests
 Most tests' requests are sent to [httpbin](http://httpbin.org), so if you wanna run the test, please make sure you can resolve the host(httpbin).

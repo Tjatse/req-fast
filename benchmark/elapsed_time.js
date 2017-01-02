@@ -1,49 +1,53 @@
-var req      = require('request'),
-    reqFast  = require('../'),
-    async    = require('async');
+'use strict'
+
+var request = require('request')
+var async = require('async')
+var reqfast = require('../')
+
+let mod = {
+  request,
+  reqfast
+}
+let max = -10000
+let min = -max
+let total = 0
+const attempts = 1000
 
 // ignoring network issues, using local site for testing.
-console.log('A sample of 1000 cases:');
+console.log(`A sample of ${attempts} cases:\n`)
+console.log('module\tavg\tmin\tmax')
 async.waterfall([
-  function(next){
-    test('request', 1000, next);
-  },
-  function(next){
-    test('req-fast', 1000, next);
-  },
-]);
+  async.apply(test, 'request'),
+  async.apply(test, 'reqfast')
+], () => {
+  console.log('\ncompleted')
+})
 
-var max = -100, min = 100, total = 0;
-function test(module, count, cb){
-  var waterfalls = [];
-  for (var i = 0; i < count; i++) {
-    waterfalls.push(function(next){
-      this.start = Date.now();
-      this.callback = next;
-      var mod = {
-        'request' : req,
-        'req-fast': reqFast
-      };
-      mod[module]('http://localhost:9002/?t=' + Math.random(), tookMS.bind(this));
-    });
+function test (module, fn) {
+  let waterfalls = []
+  for (let i = 0; i < attempts; i++) {
+    waterfalls.push((next) => {
+      mod[module](`http://localhost:9002/?t=${Math.random()}`, () => {
+        took(Date.now(), next)
+      })
+    })
   }
-  async.waterfall(waterfalls, function(error, result){
-    var avg = total / count;
-    console.log('%s x %d ms (+%s%, -%s%).', module, avg.toFixed(3), ((max / avg - 1) * 100).toFixed(2), ((1 - min / avg) * 100).toFixed(2));
-    min = 0;
-    max = 0;
-    total = 0;
-    cb();
-  });
+  async.waterfall(waterfalls, () => {
+    let avg = total / attempts
+    console.log('%s\t%dms\t%dms\t%dms', module, avg.toFixed(3), min.toFixed(3), max.toFixed(3))
+    min = 0
+    max = 0
+    total = 0
+    fn()
+  })
 }
-function tookMS(err, resp, body){
-  var tick = Date.now() - this.start;
-  total += tick;
-  max = Math.max(tick, max);
-  min = Math.min(tick, min);
+
+function took (start, fn) {
+  let spent = Date.now() - start
+  total += spent
+  max = Math.max(spent, max)
+  min = Math.min(spent, min)
 
   // setTimeout makes server have no stick(there have too much socket connections).
-  setTimeout(function(that){
-    that.callback();
-  }, 10, this);
+  setTimeout(fn, 10)
 }

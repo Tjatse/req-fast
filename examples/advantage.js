@@ -1,37 +1,52 @@
-var req = require('../');
+'use strict'
+
+var req = require('../')
+
 req({
-  url: 'http://httpbin.org/get',  // url and uri are both fine.
-  method: 'GET',                  // could be one of OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE and CONNECT
-  timeout: 10000,                 // millisecond(s)
-  dataType: 'JSON',               // `json` or `form`, `json` as default, this property effects on POST, PUT, PATCH `method` only.
-  data: {                         // JSON Object
+  // url and uri are both fine.
+  url: 'http://httpbin.org/get',
+  // could be one of OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE and CONNECT
+  method: 'GET',
+  // millisecond(s)
+  timeout: 10000,
+  // `json` or `form`, `json` as default, this property effects on POST, PUT, PATCH `method` only.
+  dataType: 'JSON',
+  // JSON Object
+  data: {
     q: 'req-fast',
     v: 0.1
   },
-  agent: true,                    // automatic generate `user-agent` header.
-  charset: 'utf-8',               // set charset of content encodings if necessary. this option takes top priority of
-                                  // decoding chunks, if not set, the charset in response.headers['content-type'] will
-                                  // be used at first, then the charset on <meta ... />.
-  disableRedirect: false,         // enabled following redirects(false as default).
-  maxRedirects: 10,               // maximize redirects(3 as default).
-  disableGzip: false,             // enabled `gzip,deflate,shcd` encodings and automatic decompress content encodings(false as default).
-  cookies: {                      // JSON Object
+  // automatic generate `user-agent` header.
+  agent: true,
+  // set charset of content encodings if necessary. this option takes top priority of
+  // decoding chunks, if not set, the charset in response.headers['content-type'] will
+  // be used at first, then the charset on <meta ... />.
+  charset: 'utf-8',
+  // enabled following redirects(false as default).
+  disableRedirect: false,
+  // maximize redirects(3 as default).
+  maxRedirects: 10,
+  // enabled `gzip,deflate,shcd` encodings and automatic decompress content encodings(false as default).
+  disableGzip: false,
+  // JSON Object
+  cookies: {
     token: 'abcdef123'
   },
-  headers: {                      // JSON Object
+  // JSON Object
+  headers: {
     referer: 'http://www.google.com'
-  }/*,
+  },
   proxy: {
     host: '[HOST]',
-    port: [PORT],
+    port: 8088,
     localAddress: '[LOCALADDRESS]',
     proxyAuth: 'user:password',
-    headers: [JSON Object]
-  }*/
-}, function(err, resp){
-  if(err){
-    return console.log('[ERROR]', err.message);
+    headers: {}
+  }
+}, (err, resp) => {
+  if (err) {
+    return console.log('[ERROR]', err.message)
   }
 
-  console.log(resp);
-});
+  console.log(resp)
+})

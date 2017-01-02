@@ -19,24 +19,34 @@
     "download"
   ],
   "author": "Tjatse",
-  "license": "Apache, Version 2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Tjatse/req-fast/issues"
   },
   "engines": [
-    "node >= 0.8.0"
+    "node >= 0.12.0"
   ],
   "dependencies": {
-    "tunnel2":"^0.0.4",
-    "urijs": "~1.18.1",
-    "random-ua": "^0.0.6",
-    "iconv-lite": "^0.4.13"
+    "debug": "^2.6.0",
+    "iconv-lite": "^0.4.15",
+    "random-ua": "0.0.6",
+    "tunnel2": "0.0.4",
+    "urijs": "^1.18.4"
   },
   "devDependencies": {
-    "mocha": "^1.21.4",
-    "chai": "^1.9.1",
-    "request": "~2.51.0",
-    "async": "~0.9.0"
+    "async": "^2.1.4",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "request": "^2.79.0"
+  },
+  "standard": {
+    "ignore": [],
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "after"
+    ]
   },
   "readmeFilename": "README.md"
 }

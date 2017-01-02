@@ -1,8 +1,11 @@
-var req = require('../');
-req('http://www.bing.com', function(err, resp){
-  if(err){
-    return console.log('[ERROR]', err.message);
+'use strict'
+
+var req = require('../')
+
+req('http://www.bing.com', (err, resp) => {
+  if (err) {
+    return console.log('[ERROR]', err.message)
   }
 
-  console.log(resp);
-});
+  console.log(resp)
+})

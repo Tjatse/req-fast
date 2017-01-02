@@ -1,49 +1,52 @@
-var req      = require('request'),
-    reqFast  = require('../'),
-    async    = require('async');
+'use strict'
 
-// ignoring network issues, using local site for testing.
-console.log('A sample of 1000 cases:');
-async.waterfall([
-  function(next){
-    test('request', 1000, next);
-  },
-  function(next){
-    test('req-fast', 1000, next);
-  },
-]);
+var async = require('async')
+var request = require('request')
+var reqfast = require('../')
 
-var max = -100, min = 100, total = 0;
-function test(module, count, cb){
-  var waterfalls = [];
-  for (var i = 0; i < count; i++) {
-    waterfalls.push(function(next){
-      this.start = process.memoryUsage().rss;
-      this.callback = next;
-      var mod = {
-        'request' : req,
-        'req-fast': reqFast
-      };
-      mod[module]('http://localhost:9002/?t=' + Math.random(), tookMS.bind(this));
-    });
-  }
-  async.waterfall(waterfalls, function(error, result){
-    var avg = total / count;
-    console.log('%s x %d bytes (+%s%, -%s%).', module, avg.toFixed(3), ((max / avg - 1) * 100).toFixed(2), ((1 - min / avg) * 100).toFixed(2));
-    min = 0;
-    max = 0;
-    total = 0;
-    cb();
-  });
+let mod = {
+  request,
+  reqfast
 }
-function tookMS(err, resp, body){
-  var mem = process.memoryUsage().rss - this.start;
-  total += mem;
-  max = Math.max(mem, max);
-  min = Math.min(mem, min);
+let max = -10000
+let min = -max
+let total = 0
+const attempts = 1000
+// ignoring network issues, using local site for testing.
+console.log(`A sample of ${attempts} cases:\n`)
+console.log('module\tavg\tmin\tmax')
+async.waterfall([
+  async.apply(test, 'request'),
+  async.apply(test, 'reqfast')
+], () => {
+  console.log('\ncompleted')
+})
+
+function test (module, fn) {
+  let waterfalls = []
+  for (let i = 0; i < attempts; i++) {
+    waterfalls.push((next) => {
+      mod[module]('http://localhost:9002/?t=' + Math.random(), () => {
+        took(process.memoryUsage().rss, next)
+      })
+    })
+  }
+  async.waterfall(waterfalls, () => {
+    let avg = total / attempts
+    console.log('%s\t%db\t%db\t%db', module, avg.toFixed(3), min.toFixed(3), max.toFixed(3))
+    min = 0
+    max = 0
+    total = 0
+    fn()
+  })
+}
+
+function took (m, fn) {
+  let mem = process.memoryUsage().rss - m
+  total += mem
+  max = Math.max(mem, max)
+  min = Math.min(mem, min)
 
   // setTimeout makes server have no stick(there have too much socket connections).
-  setTimeout(function(that){
-    that.callback();
-  }, 10, this);
+  setTimeout(fn, 10)
 }
