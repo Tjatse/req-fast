@@ -91,7 +91,10 @@ rs.on('data', function(chunk){
 rs.on('end', function(resp){
   // ...
 });
-rs.on('error', function(error){
+rs.on('error', function(error, response){
+  // ...
+});
+rs.on('abort', function(){
   // ...
 });
 ```
