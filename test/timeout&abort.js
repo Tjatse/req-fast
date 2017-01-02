@@ -21,13 +21,11 @@ describe('request', function () {
   describe('abort', function () {
     it('should works fine', function (done) {
       var aborted = false
+      var error
       var rs = req({
         url: 'http://httpbin.org/delay/5'
       }, function (err, resp) {
-        should.exist(err)
-        expect(aborted).equals(true)
-        expect(err.code).equals('ECONNRESET')
-        done()
+        error = err
       })
 
       rs.on('abort', function () {
@@ -37,6 +35,13 @@ describe('request', function () {
       setTimeout(function () {
         rs.abort()
       }, 1000)
+
+      setTimeout(function () {
+        should.exist(error)
+        expect(aborted).equals(true)
+        expect(error.code).equals('ECONNRESET')
+        done()
+      }, 1200)
     })
   })
 })
