@@ -1,6 +1,6 @@
 {
   "name": "req-fast",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "This module is designed to be the fast, lightweight way to fetch the web content(HTML stream).",
   "main": "lib/req.js",
   "scripts": {
