@@ -1,6 +1,6 @@
 {
   "name": "req-fast",
-  "version": "0.2.20",
+  "version": "0.2.21",
   "description": "This module is designed to be the fast, lightweight way to fetch the web content(HTML stream).",
   "main": "lib/req.js",
   "scripts": {
@@ -29,7 +29,7 @@
   "dependencies": {
     "debug": "^2.6.0",
     "iconv-lite": "^0.4.15",
-    "tunnel2": "0.0.4",
+    "tunnel2": "^0.0.5",
     "urijs": "^1.18.4",
     "user-agents": "^1.0.387"
   },
